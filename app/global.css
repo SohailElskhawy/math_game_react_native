@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+    .game-mode-btn{
+        @apply text-blue-700 hover:text-white border mx-2 my-2 border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800;
+    }
+
+        .tab-icon {
+        @apply flex min-w-20 items-center justify-center min-h-full gap-1 mt-12;
+    }
+}
