@@ -1,19 +1,22 @@
-import { COLOR_MAP, GAME_MODES } from "@/constants";
+import { COLOR_MAP, GAME_MODES, THEME_COLORS } from "@/constants";
 import useSettingsStore from "@/store/settings.store";
-import cn from 'clsx';
 import { FlatList, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontA from 'react-native-vector-icons/FontAwesome6';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 export default function Index() {
 	const { theme, colorTheme } = useSettingsStore()
+	const themeColors = THEME_COLORS[theme as keyof typeof THEME_COLORS]
 
 	return (
-		<SafeAreaView className={cn("flex-1", theme)}>
+		<SafeAreaView 
+			className="flex-1"
+			style={{ backgroundColor: themeColors.background }}
+		>
 			<FlatList
 				data={GAME_MODES}
-				renderItem={({ item }) => <GameModeButton name={item.name} colorTheme={colorTheme} icon={item.icon}/>}
-				extraData={colorTheme}
+				renderItem={({ item }) => <GameModeButton name={item.name} colorTheme={colorTheme} icon={item.icon} theme={theme}/>}
+				extraData={[colorTheme, theme]}
 				keyExtractor={item => item.name}
 				contentContainerClassName="pb-28 px-5"
 				ListHeaderComponent={() => (
@@ -31,30 +34,45 @@ export default function Index() {
 	);
 }
 
-const GameModeButton = ({ name, colorTheme, icon }: { name: string, colorTheme: string, icon: string }) => {
+const GameModeButton = ({ name, colorTheme, icon, theme }: { name: string, colorTheme: string, icon: string, theme: string }) => {
+	const themeColors = THEME_COLORS[theme as keyof typeof THEME_COLORS]
+	const accentColor = COLOR_MAP[colorTheme as keyof typeof COLOR_MAP]
+	
 	return (
 		<View className="my-6">
-			<Pressable className={cn("game-mode-btn", colorTheme)} android_ripple={{ color: '#fffff22' }}>
+			<Pressable 
+				className="border mx-2 my-2 font-medium rounded-lg px-5 py-2.5 text-center"
+				style={{ 
+					borderColor: accentColor,
+					backgroundColor: theme === 'dark' ? themeColors.surface : themeColors.background
+				}}
+				android_ripple={{ color: accentColor + '22' }}
+			>
 				<View className="flex-1 flex-row items-center justify-between">
 					{
 						icon === "divide" ? (
-							<FontA name={icon} size={21} color={COLOR_MAP[colorTheme as keyof typeof COLOR_MAP]} />
-						): 	<MaterialIcon name={icon} size={25} color={COLOR_MAP[colorTheme as keyof typeof COLOR_MAP]} />
+							<FontA name={icon} size={21} color={accentColor} />
+						): 	<MaterialIcon name={icon} size={25} color={accentColor} />
 					}
 					<Text
 						className="text-center font-quicksand-bold text-4xl"
-						style={{ color: COLOR_MAP[colorTheme as keyof typeof COLOR_MAP] }}
+						style={{ color: accentColor }}
 					>
 						{name}
 					</Text>
 					{
 						icon === "divide" ? (
-							<FontA name={icon} size={21} color={COLOR_MAP[colorTheme as keyof typeof COLOR_MAP]} />
-						): 	<MaterialIcon name={icon} size={25} color={COLOR_MAP[colorTheme as keyof typeof COLOR_MAP]} />
+							<FontA name={icon} size={21} color={accentColor} />
+						): 	<MaterialIcon name={icon} size={25} color={accentColor} />
 					}
 				</View>
 				{/* if there is high score show */}
-				<Text className="text-center font-quicksand-light text-sm">High Score: 1212</Text>
+				<Text 
+					className="text-center font-quicksand-light text-sm"
+					style={{ color: themeColors.textSecondary }}
+				>
+					High Score: 1212
+				</Text>
 			</Pressable>
 		</View>
 	)

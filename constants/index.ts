@@ -33,3 +33,20 @@ export const COLOR_MAP = {
     purple: '#a855f7',
     orange: '#f97316'
 }
+
+export const THEME_COLORS = {
+    light: {
+        background: '#ffffff',
+        surface: '#f8f9fa',
+        text: '#1f2937',
+        textSecondary: '#6b7280',
+        border: '#e5e7eb'
+    },
+    dark: {
+        background: '#1e293b',
+        surface: '#334155',
+        text: '#f8fafc',
+        textSecondary: '#cbd5e1',
+        border: '#475569'
+    }
+}
