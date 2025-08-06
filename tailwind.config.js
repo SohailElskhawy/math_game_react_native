@@ -2,24 +2,22 @@
 module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
+  safelist: [
+    'text-red-700', 'text-red-500',
+    'text-blue-700', 'text-blue-500',
+    'text-pink-700', 'text-pink-500',
+    'text-purple-700', 'text-purple-500',
+    'text-orange-700', 'text-orange-500',
+    'dark:text-red-500', 'dark:text-blue-500', 'dark:text-pink-500', 'dark:text-purple-500', 'dark:text-orange-500'
+  ],
   theme: {
     extend: {
-      colors: {
-        primary: "#FE8C00",
-        white: {
-          DEFAULT: "#ffffff",
-          100: "#fafafa",
-          200: "#FE8C00",
-        },
-        gray: {
-          100: "#878787",
-          200: "#878787",
-        },
-        dark: {
-          100: "#181C2E",
-        },
-        error: "#F14141",
-        success: "#2F9B65",
+      colors:{
+        blue:"#3b82f6",
+        red:"#ef4444",
+        pink:"#ec4899",
+        purple:"#a855f7",
+        orange:"#f97316"
       },
       fontFamily: {
         quicksand: ["Quicksand-Regular", "sans-serif"],

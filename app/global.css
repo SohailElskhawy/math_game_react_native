@@ -2,13 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
     .game-mode-btn{
-        @apply text-blue-700 hover:text-white border mx-2 my-2 border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800;
+        @apply border mx-2 my-2 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2;
     }
 
-        .tab-icon {
-        @apply flex min-w-20 items-center justify-center min-h-full gap-1 mt-12;
+    .tab-icon {
+        @apply flex min-w-20 items-center justify-center min-h-full gap-0.5 mt-4;
+    }
+
+    .blue{
+        @apply text-blue-700 hover:text-white border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800;
+    }
+
+    .red{
+        @apply text-red-700 hover:text-white border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-500 dark:focus:ring-red-800;
+    }
+    
+    .pink{
+        @apply text-pink-700 hover:text-white border-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:border-pink-500 dark:text-pink-500 dark:hover:text-white dark:hover:bg-pink-500 dark:focus:ring-pink-800;
+    }
+    
+    .purple{
+        @apply text-purple-700 hover:text-white border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:border-purple-500 dark:text-purple-500 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-800;
+    }
+    
+    .orange{
+        @apply text-orange-700 hover:text-white border-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:border-orange-500 dark:text-orange-500 dark:hover:text-white dark:hover:bg-orange-500 dark:focus:ring-orange-800;
+    }
+
+
+    .light{
+        @apply bg-white
+    }
+
+    .dark{
+        @apply bg-slate-800
     }
 }
