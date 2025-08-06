@@ -5,13 +5,13 @@ import { create } from "zustand";
 
 type SettingsStore = {
     isLives: boolean,
-    setIsLives: (value: boolean) => void
+    setIsLives: (value: boolean) => Promise<void>
     isTimer: boolean,
-    setIsTimer: (value: boolean) => void
+    setIsTimer: (value: boolean) => Promise<void>
     theme: "dark" | "light" | string,
-    setTheme: (value: string) => void,
+    setTheme: (value: string) => Promise<void>,
     colorTheme: "blue" | "red" | "pink" | "purple" | "orange" | string
-    setColorTheme: (value: string) => void,
+    setColorTheme: (value: string) => Promise<void>,
     initializeSettings: () => Promise<void>
 }
 
