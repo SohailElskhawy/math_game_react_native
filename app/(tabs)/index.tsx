@@ -1,6 +1,7 @@
 import { COLOR_MAP, GAME_MODES, THEME_COLORS } from "@/constants";
 import useScoreStore from "@/store/score.store";
 import useSettingsStore from "@/store/settings.store";
+import { router } from "expo-router";
 import { FlatList, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontA from 'react-native-vector-icons/FontAwesome6';
@@ -57,6 +58,10 @@ const GameModeButton = ({ name, colorTheme, icon, theme, score }: { name: string
 					backgroundColor: theme === 'dark' ? themeColors.surface : themeColors.background
 				}}
 				android_ripple={{ color: accentColor + '22' }}
+				onPress={() => router.push({
+                    pathname: '/questions',
+                    params: { gameMode: name.toLowerCase() }
+                })}
 			>
 				<View className="flex-1 flex-row items-center justify-between">
 					{
