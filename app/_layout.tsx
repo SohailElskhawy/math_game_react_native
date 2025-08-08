@@ -1,3 +1,4 @@
+import useScoreStore from '@/store/score.store';
 import useSettingsStore from '@/store/settings.store';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from "expo-router";
@@ -7,6 +8,7 @@ import "./global.css";
 
 export default function RootLayout() {
     const {initializeSettings} = useSettingsStore() 
+    const { initializeScores } = useScoreStore()
     const [fontsLoaded, error] = useFonts({
     "Quicksand-Regular": require("../assets/fonts/Quicksand-Regular.ttf"),
     "Quicksand-Bold": require("../assets/fonts/Quicksand-Bold.ttf"),
@@ -21,6 +23,7 @@ export default function RootLayout() {
 
   useEffect(()=>{
     initializeSettings()
+    initializeScores()
   },[])
 
     if(!fontsLoaded) return null

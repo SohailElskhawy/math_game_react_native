@@ -27,11 +27,11 @@ export const GAME_MODES = [
 ]
 
 export const COLOR_MAP = {
-    red: '#ef4444',
     blue: '#3b82f6',
+    red: '#ef4444',
+    orange: '#f97316',
     pink: '#ec4899',
-    purple: '#a855f7',
-    orange: '#f97316'
+    purple: '#a855f7'
 }
 
 export const THEME_COLORS = {

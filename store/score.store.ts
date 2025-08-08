@@ -18,7 +18,7 @@ type ScoreStore = {
 }
 
 const useScoreStore = create<ScoreStore>((set) => ({
-    randomScore: 0,
+    randomScore: 100,
     additionScore: 0,
     subtractionScore: 0,
     multiplicationScore: 0,
@@ -69,7 +69,7 @@ const useScoreStore = create<ScoreStore>((set) => ({
             const storedDivisionScore = await AsyncStorage.getItem("divisionScore");
 
             set({
-                randomScore: storedRandomScore !== null ? JSON.parse(storedRandomScore) : 0,
+                randomScore: storedRandomScore !== null ? JSON.parse(storedRandomScore) : 100,
                 additionScore: storedAdditionScore !== null ? JSON.parse(storedAdditionScore) : 0,
                 subtractionScore: storedSubtractionScore !== null ? JSON.parse(storedSubtractionScore) : 0,
                 multiplicationScore: storedMultiplicationScore !== null ? JSON.parse(storedMultiplicationScore) : 0,
