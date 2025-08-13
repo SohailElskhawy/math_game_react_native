@@ -50,3 +50,8 @@ export const THEME_COLORS = {
         border: '#475569'
     }
 }
+
+
+export const TOTAL_LIVES = 3;
+
+export const INITIAL_TIME = 20; 

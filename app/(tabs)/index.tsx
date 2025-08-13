@@ -60,7 +60,7 @@ const GameModeButton = ({ name, colorTheme, icon, theme, score }: { name: string
 				android_ripple={{ color: accentColor + '22' }}
 				onPress={() => router.push({
                     pathname: '/questions',
-                    params: { gameMode: name.toLowerCase() }
+                    params: { gameMode: name.toLowerCase(), highScore: score }
                 })}
 			>
 				<View className="flex-1 flex-row items-center justify-between">
