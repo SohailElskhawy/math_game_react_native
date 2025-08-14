@@ -1,6 +1,6 @@
 import { COLOR_MAP, THEME_COLORS } from '@/constants'
-import useScoreStore from '@/store/score.store'
 import useSettingsStore from '@/store/settings.store'
+import { resetScores } from '@/utils/score.util'
 import React from 'react'
 import { Alert, Pressable, ScrollView, Switch, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -8,7 +8,6 @@ import MaterialDesignIcons from 'react-native-vector-icons/MaterialCommunityIcon
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 const Settings = () => {
 	const { theme, colorTheme, setTheme, setIsTimer, isTimer, isLives, setIsLives, setColorTheme } = useSettingsStore()
-	const { resetScores } = useScoreStore()
 	const themeColors = THEME_COLORS[theme as keyof typeof THEME_COLORS]
 	const textColor = COLOR_MAP[colorTheme as keyof typeof COLOR_MAP]
 

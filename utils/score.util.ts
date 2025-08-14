@@ -40,3 +40,14 @@ export const setScore = async (gameMode:string, value:number) => {
             return 0;
     }
 }
+
+
+export const resetScores = async () => {
+    await Promise.all([
+        AsyncStorage.setItem("randomScore", JSON.stringify(0)),
+        AsyncStorage.setItem("additionScore", JSON.stringify(0)),
+        AsyncStorage.setItem("subtractionScore", JSON.stringify(0)),
+        AsyncStorage.setItem("multiplicationScore", JSON.stringify(0)),
+        AsyncStorage.setItem("divisionScore", JSON.stringify(0))
+    ])
+}

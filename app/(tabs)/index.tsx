@@ -1,8 +1,8 @@
 import { COLOR_MAP, GAME_MODES, THEME_COLORS } from "@/constants";
 import useSettingsStore from "@/store/settings.store";
 import { getScore } from "@/utils/score.util";
-import { router } from "expo-router";
-import { useEffect, useState } from "react";
+import { router, useFocusEffect } from "expo-router";
+import { useCallback, useEffect, useState } from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontA from 'react-native-vector-icons/FontAwesome6';
@@ -41,18 +41,25 @@ const GameModeButton = ({ name, colorTheme, icon, theme }: { name: string, color
 	const accentColor = COLOR_MAP[colorTheme as keyof typeof COLOR_MAP]
 	const [score, setScore] = useState<number>(0);
 
-	useEffect(() => {
-		const fetchScore = async () => {
-			try {
-				const highScore = await getScore(name.toLowerCase());
-				setScore(Number(highScore) || 0);
-			} catch (error) {
-				console.error('Error fetching score:', error);
-			}
-		};
-
-		fetchScore();
+	const fetchScore = useCallback(async () => {
+		try {
+			const highScore = await getScore(name.toLowerCase());
+			setScore(Number(highScore) || 0);
+		} catch (error) {
+			console.error('Error fetching score:', error);
+		}
 	}, [name]);
+
+	useEffect(() => {
+		fetchScore();
+	}, [fetchScore]);
+
+	// Refresh scores when screen comes into focus
+	useFocusEffect(
+		useCallback(() => {
+			fetchScore();
+		}, [fetchScore])
+	);
 	
 	return (
 		<View className="mx-4 my-3">
