@@ -1,23 +1,15 @@
 import { COLOR_MAP, GAME_MODES, THEME_COLORS } from "@/constants";
-import useScoreStore from "@/store/score.store";
 import useSettingsStore from "@/store/settings.store";
+import { getScore } from "@/utils/score.util";
 import { router } from "expo-router";
+import { useEffect, useState } from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontA from 'react-native-vector-icons/FontAwesome6';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 export default function Index() {
 	const { theme, colorTheme } = useSettingsStore()
-	const { randomScore, additionScore, subtractionScore, multiplicationScore, divisionScore } = useScoreStore()
 	const themeColors = THEME_COLORS[theme as keyof typeof THEME_COLORS]
-	const scores = {
-		"Random":randomScore,
-		"Addition": additionScore,
-		"Subtraction":subtractionScore,
-		"Multiplication":multiplicationScore,
-		"Division":divisionScore
-	}
-
 	return (
 		<SafeAreaView
 			className="flex-1"
@@ -25,10 +17,9 @@ export default function Index() {
 		>
 			<FlatList
 				data={GAME_MODES}
-				renderItem={({ item }) => <GameModeButton name={item.name} colorTheme={colorTheme} icon={item.icon} theme={theme} score={scores[item.name as keyof typeof scores]} />}
+				renderItem={({ item }) => <GameModeButton name={item.name} colorTheme={colorTheme} icon={item.icon} theme={theme} />}
 				extraData={[colorTheme, theme]}
 				keyExtractor={item => item.name}
-				contentContainerStyle={{ paddingBottom: 120, paddingHorizontal: 20 }}
 				showsVerticalScrollIndicator={false}
 				ListHeaderComponent={() => (
 					<View className="mt-2">
@@ -45,46 +36,65 @@ export default function Index() {
 	);
 }
 
-const GameModeButton = ({ name, colorTheme, icon, theme, score }: { name: string, colorTheme: string, icon: string, theme: string, score: number }) => {
+const GameModeButton = ({ name, colorTheme, icon, theme }: { name: string, colorTheme: string, icon: string, theme: string }) => {
 	const themeColors = THEME_COLORS[theme as keyof typeof THEME_COLORS]
 	const accentColor = COLOR_MAP[colorTheme as keyof typeof COLOR_MAP]
+	const [score, setScore] = useState<number>(0);
 
+	useEffect(() => {
+		const fetchScore = async () => {
+			try {
+				const highScore = await getScore(name.toLowerCase());
+				setScore(Number(highScore) || 0);
+			} catch (error) {
+				console.error('Error fetching score:', error);
+			}
+		};
+
+		fetchScore();
+	}, [name]);
+	
 	return (
-		<View className="my-6">
+		<View className="mx-4 my-3">
 			<Pressable
-				className="border mx-2 my-2 font-medium rounded-lg px-5 py-2.5 text-center"
+				className="border rounded-lg px-5 py-6"
 				style={{
 					borderColor: accentColor,
-					backgroundColor: theme === 'dark' ? themeColors.surface : themeColors.background
+					backgroundColor: theme === 'dark' ? themeColors.surface : themeColors.background,
+					minHeight: 100
 				}}
 				android_ripple={{ color: accentColor + '22' }}
 				onPress={() => router.push({
-                    pathname: '/questions',
-                    params: { gameMode: name.toLowerCase(), highScore: score }
+                    pathname: '/(game)/questions',
+                    params: { gameMode: name.toLowerCase()}
                 })}
 			>
-				<View className="flex-1 flex-row items-center justify-between">
+				<View className="flex-row items-center justify-between mb-2">
 					{
 						icon === "divide" ? (
-							<FontA name={icon} size={21} color={accentColor} />
-						) : <MaterialIcon name={icon} size={25} color={accentColor} />
+							<FontA name="divide" size={24} color={accentColor} />
+						) : (
+							<MaterialIcon name={icon} size={28} color={accentColor} />
+						)
 					}
 					<Text
-						className="text-center font-quicksand-bold text-4xl"
+						className="text-center font-quicksand-bold text-3xl flex-1 mx-4"
 						style={{ color: accentColor }}
 					>
 						{name}
 					</Text>
 					{
 						icon === "divide" ? (
-							<FontA name={icon} size={21} color={accentColor} />
-						) : <MaterialIcon name={icon} size={25} color={accentColor} />
+							<FontA name="divide" size={24} color={accentColor} />
+						) : (
+							<MaterialIcon name={icon} size={28} color={accentColor} />
+						)
 					}
 				</View>
 				{
-					score > 0 && (
+					(score > 0) && (
 						<Text
-							className="text-center font-quicksand-light text-sm"
+							className="text-center font-quicksand-light text-sm mt-2"
 							style={{ color: themeColors.textSecondary }}
 						>
 							High Score: {score}

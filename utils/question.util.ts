@@ -128,7 +128,7 @@ const generateChoices = (answer: number) => {
     return choices
 }
 
-export const generateQuestion = (gameMode: string, score: number) => {
+export const generateQuestion = (gameMode: string, score: number): { question: string; answer: number; choices: number[] } => {
     switch (gameMode) {
         case "addition":
             return generateAdditionQuestion(score);
@@ -139,8 +139,8 @@ export const generateQuestion = (gameMode: string, score: number) => {
         case "division":
             return generateDivisionQuestion(score);
         case "random":
-            return generateRandomQuestions(score);
+            return generateRandomQuestions(score) || { question: "", answer: 0, choices: [] };
         default:
-            break;
+            return { question: "", answer: 0, choices: [] };
     }
 }

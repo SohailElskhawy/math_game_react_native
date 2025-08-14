@@ -18,7 +18,7 @@ type ScoreStore = {
 }
 
 const useScoreStore = create<ScoreStore>((set) => ({
-    randomScore: 100,
+    randomScore: 0,
     additionScore: 0,
     subtractionScore: 0,
     multiplicationScore: 0,
