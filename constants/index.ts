@@ -23,6 +23,11 @@ export const GAME_MODES = [
         id: 4,
         name: "Division",
         icon:"divide"
+    },
+    {
+        id: 5,
+        name: "Equation",
+        icon:"equals"
     }
 ]
 

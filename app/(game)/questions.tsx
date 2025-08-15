@@ -38,7 +38,7 @@ function Questions() {
 
 	const livesForQuestion = isLives ? lives : 0;
 	
-	const { question, answer, choices } = useMemo(
+	const { question, answer, choices, variable } = useMemo(
 		() => generateQuestion(gameMode, score),
 		[gameMode, score, livesForQuestion]
 	)
@@ -103,8 +103,11 @@ function Questions() {
 				/>
 			</View>
 			{/* Question in the middle */}
-			<View className='flex-1 items-center justify-center'>
-				<Text className="text-6xl font-quicksand-bold" style={{ color: textColor }} >
+			<View className='flex-1 items-center justify-center mb-8'>
+				<Text className="text-lg font-quicksand-light" style={{ color: textColor }}>
+					{variable ? `Solve for ${variable}:` : ''}
+				</Text>
+				<Text className="text-6xl font-quicksand-bold" style={{ color: textColor, lineHeight: 80, paddingBottom:4 }} >
 					{question}
 				</Text>
 			</View>

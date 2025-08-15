@@ -78,8 +78,8 @@ const GameModeButton = ({ name, colorTheme, icon, theme }: { name: string, color
 			>
 				<View className="flex-row items-center justify-between mb-2">
 					{
-						icon === "divide" ? (
-							<FontA name="divide" size={24} color={accentColor} />
+						(icon === "divide" || icon === "equals") ? (
+							<FontA name={icon} size={24} color={accentColor} />
 						) : (
 							<MaterialIcon name={icon} size={28} color={accentColor} />
 						)
@@ -91,8 +91,8 @@ const GameModeButton = ({ name, colorTheme, icon, theme }: { name: string, color
 						{name}
 					</Text>
 					{
-						icon === "divide" ? (
-							<FontA name="divide" size={24} color={accentColor} />
+						(icon === "divide" || icon === "equals") ? (
+							<FontA name={icon} size={24} color={accentColor} />
 						) : (
 							<MaterialIcon name={icon} size={28} color={accentColor} />
 						)

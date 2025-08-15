@@ -18,6 +18,9 @@ export const getScore = async (gameMode:string) => {
         case "random":
             score = await AsyncStorage.getItem("randomScore");
             break;
+        case "equation":
+            score = await AsyncStorage.getItem("equationScore");
+            break;
         default:
             return 0;
     }
@@ -36,6 +39,8 @@ export const setScore = async (gameMode:string, value:number) => {
             return await AsyncStorage.setItem("divisionScore", JSON.stringify(value))
         case "random":
             return await AsyncStorage.setItem("randomScore", JSON.stringify(value))
+        case "equation":
+            return await AsyncStorage.setItem("equationScore", JSON.stringify(value))
         default:
             return 0;
     }
@@ -49,5 +54,6 @@ export const resetScores = async () => {
         AsyncStorage.setItem("subtractionScore", JSON.stringify(0)),
         AsyncStorage.setItem("multiplicationScore", JSON.stringify(0)),
         AsyncStorage.setItem("divisionScore", JSON.stringify(0))
+        , AsyncStorage.setItem("equationScore", JSON.stringify(0))
     ])
 }
