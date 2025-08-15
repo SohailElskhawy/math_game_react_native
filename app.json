@@ -1,27 +1,39 @@
 {
   "expo": {
-    "name": "math_game",
+    "name": "Math Dash",
     "slug": "math_game",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/icons/base/icon-1024.png",
     "scheme": "mathgame",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "icon": "./assets/icons/ios/icon-1024x1024.png",
+      "icons": {
+        "20": "./assets/icons/ios/icon-20x20.png",
+        "29": "./assets/icons/ios/icon-29x29.png",
+        "40": "./assets/icons/ios/icon-40x40.png",
+        "60": "./assets/icons/ios/icon-60x60.png",
+        "76": "./assets/icons/ios/icon-76x76.png",
+        "1024": "./assets/icons/ios/icon-1024x1024.png",
+        "83.5": "./assets/icons/ios/icon-83.5x83.5.png"
+      }
     },
     "android": {
+      "icon": "./assets/icons/android/mipmap-xxxhdpi/ic_launcher.png",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/icons/android/mipmap-xxxhdpi/ic_launcher.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.sohail_elskhawy.math_game"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/icons/base/icon-1024.png"
     },
     "plugins": [
       "expo-router",
@@ -37,6 +49,11 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "cc624b8a-ccbb-4c81-a1cf-5b03e105a046"
+      }
     }
   }
 }
